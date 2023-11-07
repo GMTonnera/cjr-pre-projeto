@@ -11,11 +11,11 @@ datasource db {
 }
 
 model Tarefa{
-  categoria      Categoria @relation(fields: [categoria_id], references: [id])
+  categoria      Categoria? @relation(fields: [categoria_id], references: [id])
   id             Int     @id @default(autoincrement())
   texto          String 
   concluido      Boolean
-  categoria_id   Int
+  categoria_id   Int?
 }
 
 model Categoria{

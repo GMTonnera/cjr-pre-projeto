@@ -1,13 +1,15 @@
 import { Controller, Delete, Patch, Post, Get, Body, Param } from '@nestjs/common';
 import { CategoriaService } from './categoria.service';
-import { CategoriaDTO } from './categoria.dto';
+import { updateCategoriaDto } from './dto/updateCategoria.dto';
+import { createCategoriaDto } from './dto/createCategoria.dto';
+
 
 @Controller('categoria')
 export class CategoriaController {
     constructor(private catService: CategoriaService){}
 
     @Post()
-    createCategoria(@Body() dto: CategoriaDTO){
+    createCategoria(@Body() dto: createCategoriaDto){
         return this.catService.create(dto);
     }
 
@@ -22,7 +24,7 @@ export class CategoriaController {
     }
 
     @Patch(':id')
-    updateCategoria(@Param('id') id: string, @Body() dto: CategoriaDTO){
+    updateCategoria(@Param('id') id: string, @Body() dto: updateCategoriaDto){
         return this.catService.update(parseInt(id), dto);
     }
 

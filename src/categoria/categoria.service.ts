@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { DbService } from 'src/db/db.service';
-import { CategoriaDTO } from './categoria.dto';
+import { updateCategoriaDto } from './dto/updateCategoria.dto';
+import { createCategoriaDto } from './dto/createCategoria.dto';
 
 @Injectable()
 export class CategoriaService {
     constructor(private db: DbService){}
 
-    async create(dto: CategoriaDTO){
+    async create(dto: createCategoriaDto){
         return await this.db.categoria.create({
-            data:{
-                texto: dto.texto,
-            },
+            data: dto,
         });
     }
 
@@ -26,14 +25,12 @@ export class CategoriaService {
         return await this.db.categoria.findMany();
     }
 
-    async update(id: number, dto: CategoriaDTO){
+    async update(id: number, dto: updateCategoriaDto){
         return await this.db.categoria.update({
+            data: dto,
             where: {
                 id: id
             },
-            data: {
-                texto: dto.texto
-            }
         });
     }
 

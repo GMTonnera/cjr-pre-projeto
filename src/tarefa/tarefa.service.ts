@@ -6,29 +6,29 @@ import { tarefaCreateDTO } from './taretaCreate.dto';
 export class TarefaService {
     constructor(private db: DbService){}
 
-    create(dto: tarefaCreateDTO){
-        return this.db.tarefa.create({
-            data: {
-                texto: dto.texto,
-                concluido: dto.concluido,
-                categoria_id: dto.categoria_id
-            }
-        })
-    }
+    // create(dto: tarefaCreateDTO){
+    //     return this.db.tarefa.create({
+    //         data: {
+    //             texto: dto.texto,
+    //             concluido: dto.concluido,
+    //             categoria_id: dto.categoria_id
+    //         }
+    //     })
+    // }
 
-    getAll(){
+    // getAll(){
 
-    }
+    // }
 
-    getById(id: number){
+    // getById(id: number){
 
-    }
+    // }
 
-    update(id: number, dto: tarefaUpdateDTO){
+    // update(id: number, dto: tarefaUpdateDTO){
 
-    }
+    // }
 
-    delete(id: number){
+    // delete(id: number){
         
-    }
+    // }
 }

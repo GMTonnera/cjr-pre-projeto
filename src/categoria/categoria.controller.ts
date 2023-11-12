@@ -26,12 +26,7 @@ export class CategoriaController {
 
     @Patch(':id')
     async updateCategoria(@Param('id') id: string, @Body() dto: updateCategoriaDto){
-        // try{
-            return await this.catService.update(+id, dto);
-        // } catch(error){
-        //     return error;
-        // }
-        
+        return await this.catService.update(+id, dto);        
     }
 
     @Delete(':id')

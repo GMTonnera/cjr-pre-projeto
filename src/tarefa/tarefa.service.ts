@@ -18,7 +18,6 @@ export class TarefaService {
     }
 
     async getById(id: number){
-        console.log("ok")
         return await this.db.tarefa.findUnique({
             where: {
                 id: id
@@ -32,7 +31,7 @@ export class TarefaService {
                 id: id
             },
             data: dto
-        }).catch((error) => {throw new BadRequestException(error)})
+        })
     }
 
     async delete(id: number){
@@ -41,5 +40,29 @@ export class TarefaService {
                 id: id
             }
         })        
+    }
+
+    async deleteConcluido(){
+        return await this.db.tarefa.deleteMany({
+            where: {
+                concluido: true
+            }
+        })
+    }
+
+    async getAllConcluidos(c: boolean){
+        return await this.db.tarefa.findMany({
+            where: {
+                concluido: c
+            }
+        })
+    }
+
+    async getAllCategoria(cat_id: number){
+        return await this.db.tarefa.findMany({
+            where: {
+               categoria_id: cat_id 
+            }
+        })
     }
 }

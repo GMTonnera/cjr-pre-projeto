@@ -1,34 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { DbService } from 'src/db/db.service';
-import { tarefaCreateDTO } from './taretaCreate.dto';
+import { createTarefaDto } from './dto/createTarefa.dto';
+import { updateTarefaDto } from './dto/updateTarefa.dto';
 
 @Injectable()
 export class TarefaService {
     constructor(private db: DbService){}
 
-    // create(dto: tarefaCreateDTO){
-    //     return this.db.tarefa.create({
-    //         data: {
-    //             texto: dto.texto,
-    //             concluido: dto.concluido,
-    //             categoria_id: dto.categoria_id
-    //         }
-    //     })
-    // }
+    async create(dto: createTarefaDto){
+        return await this.db.tarefa.create({
+            data: dto
+        })    
+    }
 
-    // getAll(){
+    async getAll(){
+        return await this.db.tarefa.findMany();
+    }
 
-    // }
+    async getById(id: number){
+        console.log("ok")
+        return await this.db.tarefa.findUnique({
+            where: {
+                id: id
+            }
+        })
+    }
 
-    // getById(id: number){
+    async update(id: number, dto: updateTarefaDto){
+        return await this.db.tarefa.update({
+            where: {
+                id: id
+            },
+            data: dto
+        }).catch((error) => {throw new BadRequestException(error)})
+    }
 
-    // }
-
-    // update(id: number, dto: tarefaUpdateDTO){
-
-    // }
-
-    // delete(id: number){
-        
-    // }
+    async delete(id: number){
+        return await this.db.tarefa.delete({
+            where: {
+                id: id
+            }
+        })        
+    }
 }

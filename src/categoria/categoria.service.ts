@@ -10,7 +10,7 @@ export class CategoriaService {
     async create(dto: createCategoriaDto){
         return await this.db.categoria.create({
             data: dto,
-        });
+        }); 
     }
 
     async getById(id: number){

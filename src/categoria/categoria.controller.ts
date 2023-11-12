@@ -4,32 +4,38 @@ import { updateCategoriaDto } from './dto/updateCategoria.dto';
 import { createCategoriaDto } from './dto/createCategoria.dto';
 
 
-@Controller('categoria')
+@Controller('categoria')        
 export class CategoriaController {
     constructor(private catService: CategoriaService){}
 
     @Post()
-    createCategoria(@Body() dto: createCategoriaDto){
-        return this.catService.create(dto);
+    async createCategoria(@Body() dto: createCategoriaDto){
+        return await this.catService.create(dto);
+        
     }
 
     @Get()
-    getAllCategoria(){
-        return this.catService.getAll();
+    async getAllCategoria(){
+        return await this.catService.getAll();
     }
 
     @Get(':id')
-    getCategoria(@Param('id') id: string){
-        return this.catService.getById(parseInt(id));
+    async getCategoria(@Param('id') id: string){
+        return await this.catService.getById(+id);
     }
 
     @Patch(':id')
-    updateCategoria(@Param('id') id: string, @Body() dto: updateCategoriaDto){
-        return this.catService.update(parseInt(id), dto);
+    async updateCategoria(@Param('id') id: string, @Body() dto: updateCategoriaDto){
+        // try{
+            return await this.catService.update(+id, dto);
+        // } catch(error){
+        //     return error;
+        // }
+        
     }
 
     @Delete(':id')
-    deleteCategoria(@Param('id') id: string){
-        return this.catService.delete(parseInt(id));
+    async deleteCategoria(@Param('id') id: string){
+        return await this.catService.delete(+id);
     }
 }

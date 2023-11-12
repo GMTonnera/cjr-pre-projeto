@@ -1,10 +1,17 @@
 import {Categoria} from '@prisma/client'
-import { IsNumber, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
 export class CategoriaEntity implements Categoria{
-    @IsNumber()
+    @IsNumber({},{
+        message: "O atributo 'texto' deve ser um Int!"
+    })
     id: number
 
-    @IsString()
+    @IsNotEmpty({
+        message: "Atributo 'texto' é obrigatório!"
+    })
+    @IsString({
+        message: "O atributo 'texto' deve ser uma string!"
+    })
     texto: string
 }
